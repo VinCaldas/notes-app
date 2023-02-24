@@ -1,0 +1,195 @@
+@font-face {
+    font-family: sudoRegular;
+    src: url(./assets/Sudo-Regular.ttf);
+}
+
+@font-face {
+    font-family: sudoBold;
+    src: url(./assets/SudoUI-Bold.ttf);
+}
+
+body {
+    font-family: sudoRegular;
+    background-color: #faf1f1;
+}
+
+#container_notes {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 70px;
+}
+
+#addNote{
+    background-color: #fd9792;
+}
+
+.note, #addNote{
+    display: flex;
+    flex-direction: column;
+    width: 300px;
+    height:350px;
+    border-radius: 10px;
+    margin-top: 50px;
+    padding: 15px;
+    border-top: 6px solid #000;
+    border-right: 6px solid #000;
+    border-left: 3px solid #000;
+    border-bottom: 3px solid #000;
+    position: relative;
+}
+
+#addNote input{
+    font-family: sudoBold;
+    font-size: 30px;
+}
+
+#addNote textarea{
+    font-family: sudoRegular;
+    font-size: 23px;
+}
+
+.note{
+    cursor: move;
+    cursor: grab;
+    cursor: -moz-grab;
+    cursor: -webkit-grab;
+}
+
+.note:active{
+    cursor: grabbing;
+    cursor: -moz-grabbing;
+    cursor: -webkit-grabbing;
+}
+
+
+.note h2 {
+    font-family: sudoBold;
+    overflow-wrap: break-word;
+    font-size: 30px;
+    margin-top: 5px;
+}
+
+.note p {
+    overflow-wrap: break-word;
+    overflow-y: auto;
+    font-size: 23px;
+    margin-top: -5px;
+}
+/* .note span, .date {
+    position: absolute;
+    right: 10px;
+    font-size: 18px;
+    font-family: sudoBold;
+} */
+
+#date-container {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    right: 10px;
+    top: 3px;
+}
+
+#date-container span {
+    font-family: sudoBold;
+    font-size: 18px;
+}
+
+#date-container i {
+    margin-right: 5px;
+}
+
+
+.content {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 15px;
+    width: 275px;
+    height: 260px;
+    resize: none;
+    border: none;
+    font-size: 19px;
+    outline: none;
+    overflow: hidden;
+    background-color: transparent;
+}
+
+.title .note h2{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.title {
+    border: none;
+    outline: none;
+    background-color: transparent;
+    font-size: 23px;
+}
+
+.options {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 9px;
+}
+
+#colors-section {
+    display: flex;
+    gap: 6px;
+    padding:6px;
+    background-color: azure;
+    border: 3px solid #000;
+    border-radius: 16px;
+    cursor: pointer;
+}
+
+#save_button{
+    padding:1px;
+    width: 60px;
+    border-radius: 18px;
+    cursor: pointer;
+}
+
+#save_button:hover {
+    border: 3px solid #42f85a;
+    color: #42f85a;
+}
+
+#save_button i{
+    font-size: 27px;
+}
+
+.delete-button {
+    position: absolute;
+    padding: 9px;
+    bottom: 10px;
+    right: 10px;
+    border-radius: 50%;
+    border-top: 4px solid #000;
+    border-right: 4px solid #000;
+    border-left: 2px solid #000;
+    border-bottom: 3px solid #000;
+    cursor: pointer;
+}
+
+.delete-button:hover{
+    border-color: #da4343;
+    color: #da4343
+}
+
+.delete-button i {
+    font-size: 22px;
+}
+
+.colors {
+    width: 35px;
+    height: 35px;
+    border-radius: 16px;
+    border: 2px solid #000;
+}
+
+.hide {
+    display: none;
+}

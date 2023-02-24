@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notes.io</title>
+    <link rel="stylesheet" href="style.css">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.15.0/Sortable.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"/>
+</head>
+<body>
+    <div id="container_notes">
+        <div id="addNote">
+            <div id="date-container">
+                <i class="fa-solid fa-calendar-days"></i>
+                <span class="date"></span>
+            </div>
+            <input type="text" class="title" value="New note" >
+            <textarea class="content" placeholder="Type something..."></textarea>
+            <div class="options">
+                <div id="colors-section">
+                    <div class="colors selected" style="background-color: #fd9792;"></div>
+                    <div class="colors hide" style="background-color: #bcffbc;"></div>
+                    <div class="colors hide" style="background-color: #f8f8ab;"></div>
+                    <div class="colors hide" style="background-color: #bad8fc;"></div>
+                    <div class="colors hide" style="background-color: #fdcae1;"></div>
+                </div>
+                <button id="save_button">
+                    <i class="fa-solid fa-check"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="./scripts.js" ></script>
+</body>
+</html>
