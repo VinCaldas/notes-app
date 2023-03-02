@@ -17,16 +17,17 @@
                 <i class="fa-solid fa-calendar-days"></i>
                 <span class="date"></span>
             </div>
-            <input type="text" class="title" value="New note" >
+            <input type="text" class="title" placeholder="Title" >
+            <span class="separator"></span>
             <textarea class="content" placeholder="Type something..."></textarea>
             <div class="options">
-                <div id="colors-section">
-                    <div class="colors selected" style="background-color: #fd9792;"></div>
-                    <div class="colors hide" style="background-color: #bcffbc;"></div>
-                    <div class="colors hide" style="background-color: #f8f8ab;"></div>
-                    <div class="colors hide" style="background-color: #bad8fc;"></div>
-                    <div class="colors hide" style="background-color: #fdcae1;"></div>
-                </div>
+                <ul id="colors-list">
+                    <li class="colors selected" style="background-color: #fd9792;"></li>
+                    <li class="colors" style="background-color: #bcffbc;"></li>
+                    <li class="colors" style="background-color: #f8f8ab;"></li>
+                    <li class="colors" style="background-color: #bad8fc;"></li>
+                    <li class="colors" style="background-color: #fdcae1;"></li>
+                </ul>
                 <button id="save_button">
                     <i class="fa-solid fa-check"></i>
                 </button>

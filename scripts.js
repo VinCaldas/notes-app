@@ -1,27 +1,31 @@
-const titleAddNote = document.querySelector('.title')
-// let title = document.querySelector('.noteTitle')
-// let content = document.querySelector('.noteContent')
-const button = document.querySelector('#save_button')
-const addNote = document.querySelector('#addNote')
-const colors = document.querySelectorAll('.colors')
-let currentColor = document.querySelector('.selected')
-const addContent = document.querySelector('.content')
-let containerNotes = document.querySelector('#container_notes')
-const colorsSection = document.querySelector('#colors-section')
-const dateAddNote = document.querySelector('.date')
-const deleteBtn = document.querySelectorAll('.delete-button')
+const $noteTitle = document.querySelector('.title')
+const $noteContent = document.querySelector('.content')
+const $btnSave = document.querySelector('#save_button')
+const $addNoteContainer = document.querySelector('#addNote')
+const $colorsToPick = document.querySelectorAll('.colors')
+const $containerNotes = document.querySelector('#container_notes')
+const $colorsList = document.querySelector('#colors-list')
+const $dateAddNote = document.querySelector('.date')
 
-const notes = JSON.parse(localStorage.getItem('notes')) || [];
+const notesInLocalStorage = JSON.parse(localStorage.getItem('notes')) || [];
+
 showNotes()
-showColors(colorsSection)
 
-dateAddNote.innerHTML = new Date(Date.now()).toDateString()
+$dateAddNote.innerHTML = new Date(Date.now()).toDateString()
 
-new Sortable(containerNotes, {
+new Sortable($containerNotes, {
     animation: 150,
 })
 
-let colorSelected = '#fd9792';
+$btnSave.addEventListener('click', () => {
+    const currentColor = $addNoteContainer.style.backgroundColor
+    const currentNoteDate = new Date(Date.now()).toDateString();
+    AddNote($noteTitle.value, $noteContent.value, currentColor, currentNoteDate)
+})
+
+$colorsToPick.forEach(item => {
+    item.addEventListener('click', () => pickAColor(item))
+})
 
 class Note {
     constructor(title, content, color, date){
@@ -32,51 +36,45 @@ class Note {
     }
 }
 
-Array.from(colors).map(item => {
-    let color = item.style.backgroundColor;
 
+function pickAColor(el){
+    let color = el.style.backgroundColor;
 
-    item.addEventListener('click', () => {
-
-        Array.from(colors).map(item => {
-            item.classList.contains('selected') ? item.classList.remove('selected') : null
-        })
-
-        addNote.style.backgroundColor = color 
-        colorSelected = color;
-        item.classList.add('selected');
-        currentColor = colorSelected;
+    $colorsToPick.forEach(item => {
+        item.classList.contains('selected') ? item.classList.remove('selected') : null
     })
-})
+
+    el.classList.add('selected');
+
+    $addNoteContainer.style.backgroundColor = color
+}
 
 function AddNote(title, content, color, date) {
     if(title != "" || content != ""){
         const note = new Note(title, content, color, date)
-        notes.push(note)
+        const updatedNotes = [
+            ...notesInLocalStorage,
+            note
+        ]
+        localStorage.setItem("notes", JSON.stringify(updatedNotes));
     }
-
-    localStorage.setItem("notes", JSON.stringify(notes));
 
     location.reload()
     
 }
 
-button.addEventListener('click', () => {
-    let date = new Date(Date.now()).toDateString();
-    AddNote(titleAddNote.value, addContent.value, colorSelected, date)
-})
-
 function deleteNote(index){
-    notes.splice(index, 1)
-    localStorage.setItem("notes", JSON.stringify(notes));
+    notesInLocalStorage.splice(index, 1)
+    localStorage.setItem("notes", JSON.stringify(notesInLocalStorage));
     location.reload()
 }
 
 function showNotes(){
-    document.querySelectorAll('.note').forEach(note => note.remove())
-    notes.forEach((note, index) => {
+    const $notes = document.querySelectorAll('.note')
+    $notes.forEach(note => note.remove())
+    notesInLocalStorage.forEach((note, index) => {
 
-        let newNote = `<div class="note" style="background-color: ${note.color}">
+        let newNoteHTML = `<div class="note" style="background-color: ${note.color}">
                             <div id="date-container">
                                 <i class="fa-solid fa-calendar-days"></i>
                                 <span class="date">${note.date}</span>
@@ -87,22 +85,7 @@ function showNotes(){
                             <button class="delete-button" onClick={deleteNote(${index})}><i class="fa-solid fa-trash"></i></button>
                       </div>`
 
-        addNote.insertAdjacentHTML('afterend', newNote)
+        $addNoteContainer.insertAdjacentHTML('afterend', newNoteHTML)
     })
 }
 
-function showColors(element){
-    element.addEventListener('mouseover', () => {
-        colors.forEach(color => {
-            color.classList.remove('hide')
-        })
-    })
-    
-    element.addEventListener('mouseout', () => {
-        colors.forEach(color => {
-            if (!color.classList.contains('selected')){
-                color.classList.add('hide')
-            }
-        })
-    })
-}
